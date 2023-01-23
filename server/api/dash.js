@@ -8,7 +8,6 @@ router.post('/new', (req, res) => {
         title: req.body.title,
         description: req.body.description,
         image: req.body.image || '',
-        humanName: req.body.humanName,
     })
     .save().then(()=> {
         console.log('Dashboard saved');
@@ -35,7 +34,6 @@ router.post('/:id', (req, res) => {
         title: req.body.title,
         description: req.body.description,
         image: req.body.image || '',
-        humanName: req.body.humanName,
     }).then(()=> {
         console.log('Dashboard updated');
         res.redirect('/');
@@ -71,18 +69,6 @@ router.get('/all', (req, res) => {
     })
 })
 
-router.get('/humanName/:humanName', (req, res) => {
-    Dashboard.findOne({humanName: req.params.humanName}).exec((err, dashboard)=> {
-        console.log('got dashboard by name');
-        res.json({
-            id: dashboard._id,
-            title: dashboard.title,
-            description: dashboard.description,
-            image: dashboard.image,
-        });
-    })
-})
-
 router.get('/:id', (req, res) => {
     Dashboard.findById(req.params.id).exec((err, dashboard)=> {
         console.log('got dashboard by id');
@@ -91,7 +77,6 @@ router.get('/:id', (req, res) => {
             title: dashboard.title,
             description: dashboard.description,
             image: dashboard.image,
-            humanName: dashboard.humanName,
         });
     })
 })

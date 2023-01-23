@@ -15,5 +15,4 @@ humanNameEl = document.getElementById('humanName');
     titleEl.value = data.title;
     descriptionEl.value = data.description;
     imageEl.value = data.image;
-    humanNameEl.value = data.humanName;
 })();
