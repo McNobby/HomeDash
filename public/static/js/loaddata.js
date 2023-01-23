@@ -3,13 +3,15 @@ const applyData = async () => {
     let data = null;
 
     if (localStorage.getItem('dash')) {
-        data = await (await fetch(`/api/dash/${localStorage.getItem('dash')}`)).json();
-    
+        data = await (await fetch(`/api/dash/${localStorage.getItem('dash')}`)).json()
+        .catch(err => {
+            console.log(err);
+            localStorage.removeItem('dash');
+            return;
+        })
     }
     else {
-        let humanName = prompt('Please the key for your dashboard');
-        data = await (await fetch('/api/dash/humanName/'+humanName)).json();
-        localStorage.setItem('dash', data.id)
+        return;
     }
 
     

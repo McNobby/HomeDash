@@ -51,7 +51,7 @@ body{
     border-radius: 1rem;
 
     transition: all 0.3s;
-    box-shadow: 6px 6px 10px 5px rgba(20, 20, 20, 0.651);;
+    box-shadow: 6px 6px 10px 5px rgba(20, 20, 20, 0.651),  inset 0 0 250px 250px rgba(6, 50, 70, 0.425);
 
     display: flex;
     justify-content: center;
@@ -64,7 +64,7 @@ body{
 
 .item:hover{
     transform: translateY(-5px) translateX(-5px);
-    box-shadow: 11px 15px 15px 10px rgba(20, 20, 20, 0.651);;
+    box-shadow: 11px 15px 15px 10px rgba(20, 20, 20, 0.651),  inset 0 0 250px 250px rgba(6, 50, 70, 0.425);
 }
 
 .glass {

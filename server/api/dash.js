@@ -11,7 +11,7 @@ router.post('/new', (req, res) => {
     })
     .save().then(()=> {
         console.log('Dashboard saved');
-        res.redirect('/');
+        res.redirect('/all.html');
     })
 })
 
@@ -37,6 +37,9 @@ router.post('/:id', (req, res) => {
     }).then(()=> {
         console.log('Dashboard updated');
         res.redirect('/');
+    }).catch(err => {
+        console.log(err);
+        res.redirect('/all.html');
     })
 })
 
@@ -45,6 +48,16 @@ router.delete('/item/:id', (req, res) => {
         console.log('Item deleted');
         res.redirect('/');
     })
+})
+
+router.delete('/:id', (req, res) => {
+    Dashboard.deleteOne({_id: req.params.id}).then(()=> {
+        console.log('Dashboard deleted');
+    })
+    Item.deleteMany({dashId: req.params.id}).then(()=> {
+        console.log('Items deleted');
+    })
+    res.status(200).send();
 })
 
 router.get('/:id/items', (req, res) => {
@@ -70,15 +83,21 @@ router.get('/all', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    Dashboard.findById(req.params.id).exec((err, dashboard)=> {
-        console.log('got dashboard by id');
-        res.json({
-            id: dashboard._id,
-            title: dashboard.title,
-            description: dashboard.description,
-            image: dashboard.image,
-        });
-    })
+    try{
+            Dashboard.findById(req.params.id).exec((err, dashboard)=> {
+            console.log('got dashboard by id');
+            if(!dashboard) return res.redirect('/all.html');
+            res.json({
+                id: dashboard._id,
+                title: dashboard.title,
+                description: dashboard.description,
+                image: dashboard.image,
+            });
+        })
+    }catch(err) {
+        console.log(err);
+        res.redirect('/all.html');
+    }
 })
 
 module.exports = router;

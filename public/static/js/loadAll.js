@@ -3,7 +3,7 @@ const loadItems = async ()=> {
 
     const items = await (await fetch(`/api/dash/all`)).json();
     
-    window.items = items;
+    window.dashes = items;
 
     items.forEach(item => {
         const itemContainer = document.createElement('div');
@@ -20,7 +20,7 @@ const loadItems = async ()=> {
         
         itemContainer.id = item.id;
         itemContainer.className = 'miniDash glass';
-        itemContainer.onclick = openDash
+        itemContainer.onclick = deleteOrOpenLink
 
         dashdoardEl.appendChild(itemContainer);
     })
@@ -31,6 +31,7 @@ loadItems();
 
 const openDash = ({target}) => {
     const id = target.id;
+    console.log(id);
     localStorage.setItem('dash', id);
     window.location.href = '/';
 }
