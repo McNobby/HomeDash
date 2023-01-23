@@ -51,7 +51,7 @@ body{
     border-radius: 1rem;
 
     transition: all 0.3s;
-    box-shadow: 4px 5px 10px 10px rgba(20, 20, 20, 0.651);;
+    box-shadow: 6px 6px 10px 5px rgba(20, 20, 20, 0.651);;
 
     display: flex;
     justify-content: center;
