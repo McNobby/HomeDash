@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="/js/loaddata.js"></script>
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Add Item</title>
+</head>
+<body>
+    <div class="container">
+        <div class="dash glass">
+            <h1>Add Item</h1>
+            <form id="form" method="POST">
+                <input required type="text" name="title" placeholder="Title">
+                <input  type="text" name="description" placeholder="Description">
+                <input type="url" name="image" placeholder="Custom image">
+                <input required type="url" name="link" placeholder="link">
+                <input required type="submit" value="Submit">
+            </form>
+        </div>
+        
+    </div>
+</body>
+<script>
+    let form = document.getElementById("form"); 
+    form.action = `/api/dash/new/${localStorage.getItem('dash')}/item`;
+</script>
+</html>

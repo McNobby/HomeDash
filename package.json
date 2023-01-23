@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  },
+  "name": "homedash",
+  "version": "1.0.0",
+  "main": "/server/server.js",
+  "scripts": {
+    "test": "npx nodemon ./server/server.js"
+  },
+  "author": "Teodorbb",
+  "license": "ISC",
+  "description": ""
+}
