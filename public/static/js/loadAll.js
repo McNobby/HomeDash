@@ -1,4 +1,4 @@
-const loadItems = async ()=> {
+const loadAll = async ()=> {
     const dashdoardEl = document.querySelector('.items');
 
     const items = await (await fetch(`/api/dash/all`)).json();
@@ -26,12 +26,11 @@ const loadItems = async ()=> {
     })
 
 }
-loadItems();
+loadAll();
 
 
 const openDash = ({target}) => {
     const id = target.id;
-    console.log(id);
     localStorage.setItem('dash', id);
     window.location.href = '/';
 }
