@@ -14,6 +14,6 @@ const deleteOrOpenLink = async (element) => {
         fetch('/api/dash/item/'+id, {method: 'DELETE'}).then(() => window.location.reload());
     }else{
         let link = window.items.filter(item => item._id == id)[0].link;
-        window.open(link, '_blank');
+        window.top.location.href = link 
     }
 }
