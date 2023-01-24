@@ -84,10 +84,10 @@ router.get('/all', (req, res) => {
 
 router.get('/:id', (req, res) => {
     try{
-            Dashboard.findById(req.params.id).exec((err, dashboard)=> {
+        Dashboard.findById(req.params.id).exec((err, dashboard)=> {
             console.log('got dashboard by id');
             if(!dashboard) return res.redirect('/all.html');
-            res.json({
+            return res.json({
                 id: dashboard._id,
                 title: dashboard.title,
                 description: dashboard.description,

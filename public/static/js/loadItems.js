@@ -1,7 +1,7 @@
 const loadItems = async ()=> {
     id = localStorage.getItem('dash');
 
-    const items = await (await fetch(`/api/dash/${id}/items`)).json();
+    const items = await (await fetch(`/api/dash/${id}/items`, {headers: getAuthHeader()})).json();
     window.items = items;
     items.forEach(item => {
         const itemTextWrap = document.createElement('div');

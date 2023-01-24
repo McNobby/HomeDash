@@ -1,7 +1,9 @@
 const loadAll = async ()=> {
     const dashdoardEl = document.querySelector('.items');
 
-    const items = await (await fetch(`/api/dash/all`)).json();
+    const items = await (await fetch(`/api/dash/all`, {
+        headers: getAuthHeader()
+    })).json();
     
     window.dashes = items;
 

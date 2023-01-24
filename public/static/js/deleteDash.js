@@ -11,7 +11,7 @@ const activateDelete = () => {
 const deleteOrOpenLink = async (element) => {
     let id = element.target.id
     if (deleteActive) {
-        fetch('/api/dash/'+id, {method: 'DELETE'}).then(() => window.location.reload());
+        fetch('/api/dash/'+id, {method: 'DELETE', headers: getAuthHeader()}).then(() => window.location.reload());
     }else{
         localStorage.setItem('dash', id);
         window.location.href = '/';

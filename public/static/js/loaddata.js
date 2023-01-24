@@ -1,9 +1,14 @@
 const applyData = async () => {
 
+    if(!localStorage.getItem('token') && window.location.pathname !== '/login.html') {
+
+        return window.location.href = '/login.html';
+    }
+
     let data = null;
 
     if (localStorage.getItem('dash')) {
-        data = await (await fetch(`/api/dash/${localStorage.getItem('dash')}`)).json()
+        data = await (await fetch(`/api/dash/${localStorage.getItem('dash')}`, {headers: getAuthHeader()})).json()
         .catch(err => {
             console.log(err);
             localStorage.removeItem('dash');
@@ -29,4 +34,12 @@ const applyData = async () => {
     
     if(loadItems) loadItems();
 }
+
+const getAuthHeader = () => {
+    return { 'Authorization': `Bearer ${localStorage.getItem('token')}`}
+}
+
+
+
 applyData()
+
