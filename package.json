@@ -7,7 +7,8 @@
   "version": "1.0.0",
   "main": "/server/server.js",
   "scripts": {
-    "test": "npx nodemon ./server/server.js"
+    "test": "npx nodemon ./server/server.js",
+    "serve": "node ./server/server.js"
   },
   "author": "Teodorbb",
   "license": "ISC",
