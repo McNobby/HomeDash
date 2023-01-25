@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    hostname: mongdb
+    ports:
+      - 27017:27017
+  
+  dash:
+    image: dr.teobb.no/dash:latest
+    restart: always
+    environment:
+      AUTH_SECRET: SuperDuperSuperDuperSuperDuperSuperDuperSecret123!
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin
+      DB_HOSTNAME: database
+    ports:
+      - 3000:3000
+    links:
+      - "mongo:database"
