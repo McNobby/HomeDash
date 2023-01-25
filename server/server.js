@@ -26,11 +26,14 @@ app.use('/api', api)
 app.listen(port, (req, res) => {
 
 
-    if(!auth.adminUserExists()) {
+    auth.adminUserExists().then(result => {
+        if(result) return;
+        console.log('Registering admin user...')
         const {username, password} = auth.getAdminCredentials()
         auth.register(username, password)
-        console.log('admin user registered');
-    }
+        console.log('Admin user registered!')
+    })
+    
     
     console.log(`Server is running on http://localhost:${port}`)
 })
