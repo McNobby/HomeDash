@@ -7,6 +7,10 @@ router.use("/dash", (req, res, next) => {
     {
         next()
     }
+    else {
+
+        return res.status(401).json({message: 'Invalid token!'})
+    }
 })
 
 router.use('/dash', require('./dash'));
