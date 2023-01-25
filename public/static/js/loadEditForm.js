@@ -5,7 +5,6 @@ humanNameEl = document.getElementById('humanName');
 
 (async () => {
     if (!localStorage.getItem('dash')) {
-        window.location.href = '/all.html';
         return;
     }
 
@@ -17,3 +16,33 @@ humanNameEl = document.getElementById('humanName');
     descriptionEl.value = data.description;
     imageEl.value = data.image;
 })();
+
+document.querySelector('#send').addEventListener('click', (event)=> {
+    event.preventDefault()
+
+    const title = document.querySelector('#title').value;
+    const description = document.querySelector('#description').value;
+    const image = document.querySelector('#image').value;
+    
+    const path = localStorage.getItem('dash') ? '/api/dash/'+localStorage.getItem('dash') : '/api/dash/new'
+
+    fetch(path, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...getAuthHeader()
+        },
+        body: JSON.stringify({
+            title: title,
+            description: description,
+            image: image
+        })
+    }).then(()=> {
+        if(localStorage.getItem('dash')){
+            window.location.href = '/'
+        }
+        else{
+            window.location.href = '/all.html'
+        }
+    })
+})

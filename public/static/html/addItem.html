@@ -12,20 +12,43 @@
 </head>
 <body>
     <div class="container">
-        <div class="dash glass">
+        <div class="dash">
             <h1>Add Item</h1>
-            <form id="form" method="POST">
-                <input required type="text" name="title" placeholder="Title">
-                <input  type="text" name="description" placeholder="Description">
-                <input type="url" name="image" placeholder="Custom image">
-                <input required type="url" name="link" placeholder="link">
-                <input required type="submit" value="Submit">
-            </form>
+            <div class="login glass" >
+                <input id="title" required type="text" name="title" placeholder="Title">
+                <input id="description" type="text" name="description" placeholder="Description">
+                <input id="image" type="url" name="image" placeholder="Custom image">
+                <input id="link" required type="url" name="link" placeholder="link">
+                <button id="send">Submit</button>
+            </div>
         </div>
     </div>
 </body>
 <script>
-    let form = document.getElementById("form"); 
-    form.action = `/api/dash/new/${localStorage.getItem('dash')}/item`;
+    document.querySelector('#send').addEventListener('click', (event)=> {
+    event.preventDefault()
+
+    const title = document.querySelector('#title').value;
+    const description = document.querySelector('#description').value;
+    const image = document.querySelector('#image').value;
+    const link = document.querySelector('#link').value;
+    
+    fetch(`/api/dash/new/${localStorage.getItem('dash')}/item`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...getAuthHeader()
+        },
+        body: JSON.stringify({
+            title: title,
+            description: description,
+            image: image,
+            link: link
+        })
+    }).then(()=> {
+        window.location.replace('/')
+    })
+})
+
 </script>
 </html>
