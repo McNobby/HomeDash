@@ -3,19 +3,23 @@ services:
   mongo:
     image: mongo
     restart: always
-    hostname: mongdb
-    ports:
-      - 27017:27017
-  
   dash:
     image: dr.teobb.no/dash:latest
     restart: always
     environment:
-      AUTH_SECRET: SuperDuperSuperDuperSuperDuperSuperDuperSecret123!
-      ADMIN_USERNAME: admin
-      ADMIN_PASSWORD: admin
-      DB_HOSTNAME: database
+      AUTH_SECRET: SuperSuperSuperSuperSuperSuperSuperSuperSecretSecret
+      ADMIN_USERNAME: AGoodAdminUsername
+      ADMIN_PASSWORD: AGoodAdminPassword
+      DB_HOSTNAME: mongo
     ports:
       - 3000:3000
-    links:
-      - "mongo:database"
+# Uncomment the following block if you want a web interface for the db.
+#  mongo-express:
+#    image: mongo-express
+#    restart: always
+#    ports:
+#      - 8081:8081
+#    environment:
+#      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+#      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
