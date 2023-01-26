@@ -206,7 +206,7 @@ module.exports = class Auth {
             let decoded = this.jwt.verify(token, process.env.AUTH_SECRET, {
                 algorithms: ['HS512']
             })
-            this.userId = decoded.userId
+            this.userId = decoded.userid
             return decoded.userid
         }
         catch(err){
