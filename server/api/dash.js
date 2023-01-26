@@ -100,7 +100,10 @@ module.exports = class Dash {
         
         this.router.get('/:id', (req, res) => {
             try{
-                Dashboard.findById(req.params.id).exec((err, dashboard)=> {
+                Dashboard.find({
+                    _id: req.params.id,
+                    owner: this.auth.userId
+                }).where({own}).exec((err, dashboard)=> {
                     console.log('got dashboard by id');
                     if(!dashboard) return res.redirect('/all.html');
                     return res.json({
