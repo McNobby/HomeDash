@@ -1,5 +1,7 @@
 module.exports = class Auth {
 
+    userId;
+
     constructor() {
         this.router = require('express').Router()
         this.User = require('../../schemas/UserSchema')
@@ -204,6 +206,7 @@ module.exports = class Auth {
             let decoded = this.jwt.verify(token, process.env.AUTH_SECRET, {
                 algorithms: ['HS512']
             })
+            this.userId = decoded.userId
             return decoded.userid
         }
         catch(err){
