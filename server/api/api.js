@@ -2,6 +2,8 @@ const router = require('express').Router();
 const Auth = require('./auth');
 const auth = new Auth();
 
+const Dash = require('./dash')
+
 router.use("/dash", (req, res, next) => {
     if(auth.verifyJWT(req, res, next))
     {
@@ -13,7 +15,8 @@ router.use("/dash", (req, res, next) => {
     }
 })
 
-router.use('/dash', require('./dash'));
+const dashApi = new Dash(auth)
+router.use('/dash', dashApi.getRoutes());
 router.use('/auth', auth.getRouter() );
 
 module.exports = router;
