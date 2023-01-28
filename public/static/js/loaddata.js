@@ -6,8 +6,9 @@ const applyData = async () => {
     }
 
     let data = null;
+    let dashId = localStorage.getItem('dash')
 
-    if (localStorage.getItem('dash')) {
+    if (dashId !== "undefined" && dashId) {
         data = await (await fetch(`/api/dash/${localStorage.getItem('dash')}`, {headers: getAuthHeader()})).json()
         .catch(err => {
             console.log(err);

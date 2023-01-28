@@ -33,7 +33,7 @@
     const image = document.querySelector('#image').value;
     const link = document.querySelector('#link').value;
     
-    fetch(`/api/dash/new/${localStorage.getItem('dash')}/item`, {
+    fetch(`/api/dash/${localStorage.getItem('dash')}/item`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
