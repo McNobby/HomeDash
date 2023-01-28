@@ -1,13 +1,14 @@
 const loadAll = async ()=> {
     const dashdoardEl = document.querySelector('.items');
 
-    const items = await (await fetch(`/api/dash/all`, {
+    const items = await (await fetch(`/api/dash/`, {
         headers: getAuthHeader()
     })).json();
     
     window.dashes = items;
+    console.log(items.dashboards);
 
-    items.forEach(item => {
+    items.dashboards.forEach(item => {
         const itemContainer = document.createElement('div');
         const itemTitle = document.createElement('h3');
         const itemDescription = document.createElement('p');
@@ -20,7 +21,7 @@ const loadAll = async ()=> {
 
         if(item.image) itemContainer.style.backgroundImage = `url(${item.image})`;
         
-        itemContainer.id = item.id;
+        itemContainer.id = item._id;
         itemContainer.className = 'miniDash glass';
         itemContainer.onclick = deleteOrOpenLink
 
@@ -35,4 +36,4 @@ const openDash = ({target}) => {
     const id = target.id;
     localStorage.setItem('dash', id);
     window.location.href = '/';
-}
+} 

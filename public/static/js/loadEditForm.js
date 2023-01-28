@@ -24,10 +24,10 @@ document.querySelector('#send').addEventListener('click', (event)=> {
     const description = document.querySelector('#description').value;
     const image = document.querySelector('#image').value;
     
-    const path = localStorage.getItem('dash') ? '/api/dash/'+localStorage.getItem('dash') : '/api/dash/new'
+    const path = localStorage.getItem('dash') ? '/api/dash/'+localStorage.getItem('dash') : '/api/dash/'
 
     fetch(path, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             ...getAuthHeader()

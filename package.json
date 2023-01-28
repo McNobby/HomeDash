@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.16",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.11.18",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -10,10 +14,15 @@
   "version": "1.0.0",
   "main": "/server/server.js",
   "scripts": {
-    "test": "npx nodemon ./server/server.js",
-    "serve": "node ./server/server.js"
+    "dev": "concurrently \"npx tsc --watch\" \"npx nodemon ./dest/server/server.js\"",
+    "serve": "node ./dest/server/server.js"
   },
   "author": "Teodorbb",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "typescript": "^4.9.4"
+  }
 }
