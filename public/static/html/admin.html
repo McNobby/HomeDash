@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <script src="/js/loaddata.js"></script>
+    <script src="/js/getFromApi.js"></script>
+
+    <title>Dash | Admin</title>
+</head>
+<body>
+    <div class="container">
+        <div class="dash glass">
+
+        <h1>Admin</h1>
+
+        <div class="adminConfig">
+            
+            <div class="users">
+                <h2>Users</h2>                
+            </div>
+
+            <form onsubmit="javascript: return false">
+                <h2>Create User</h2>
+                <input required type="username" name="newUser" placeholder="Username">
+                <input required type="password" name="password" placeholder="Password">
+                <button id="send">Create</button>
+            </form>
+        </div>
+
+        </div>
+    </div>
+</body>
+
+<script>
+    
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        let res = await getFromApi('/api/auth/check', 'GET')
+        if (!res.success) {
+                window.location.href = '/login.html';
+        }
+
+        let users = await getFromApi('/api/auth/users', 'GET');
+
+        let usersContainer = document.querySelector('.users');
+
+        users.forEach(user => {
+            let userDiv = document.createElement('div');
+            console.log(user);
+            userDiv.classList.add('user');
+            userDiv.classList.add('glass');
+
+            let username = document.createElement('h3');
+            username.innerText = user.username;
+
+            let deleteBtn = document.createElement('button');
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.id = user._id;
+            deleteBtn.onclick = deleteUser;
+
+            userDiv.appendChild(username);
+            userDiv.appendChild(deleteBtn);
+
+            usersContainer.appendChild(userDiv);
+        })
+
+    })
+
+    const createNewUser = (e) => {
+        e.preventDefault();
+        console.log('hola amigo');
+        const newUser = document.querySelector('input[name="newUser"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+        
+        if (!newUser || !password) {
+            alert('Please fill out all fields');
+            return;
+        }
+
+        getFromApi('/api/auth/register', 'POST', {username: newUser, password: password})
+        .then(res => {
+            if (res.success) {
+                window.location.href = '/admin.html';
+            }
+            else {
+                alert(res.message);
+            }
+        })
+    }
+
+    const deleteUser = async (e) => {
+        e.preventDefault()
+        let res = await getFromApi('/api/auth/user/'+e.target.id, 'DELETE')
+        console.log(res);
+        if(res.success) {
+            window.location.href = '/admin.html';
+        }
+        else {
+            alert(res.message);
+        }
+    }
+
+    document.querySelector('#send').addEventListener('click', createNewUser);
+    
+</script>
+
+</html>

@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response, Router } from "express";
 import AbstractRouterComponent from "../abstractRouterComponent.js"
-
+import Dashboard from "../../schemas/DashPropertiesSchema.js";
 
 export default class AuthApi extends AbstractRouterComponent {
 
+    dashboard: typeof Dashboard;
+
     constructor() {
         super();
+        this.dashboard = Dashboard;
     }
 
     protected buildRoutes(): void {
@@ -14,7 +17,12 @@ export default class AuthApi extends AbstractRouterComponent {
         this.router.use((req: Request, res: Response, next: NextFunction) => this.authenticate(req, res, next))
         this.router.use((req: Request, res: Response, next: NextFunction) => this.isAdminMiddleware(req, res, next))
 
+        this.router.get('/check', (req: Request, res: Response) => this.check(req, res))
+        this.router.get('/users', (req: Request, res: Response) => this.getAllUsers(req, res))
+        
         this.router.post('/register', (req: Request, res: Response) => this.register(req, res))
+
+        this.router.delete('/user/:id', (req: Request, res: Response) => this.deleteUser(req, res))
 
     }
 
@@ -74,7 +82,7 @@ export default class AuthApi extends AbstractRouterComponent {
         let password = req.body.password;    
         
         if(!username || !password) {
-            res.status(400).json({message: 'Username and password is required!'})
+            res.status(400).json({message: 'Username and password is required!', success: false})
             return;
         }
 
@@ -86,13 +94,59 @@ export default class AuthApi extends AbstractRouterComponent {
         }).save()
 
         if(!user) {
-            res.status(500).json({message: 'Something went wrong!'})
+            res.status(500).json({message: 'Something went wrong!', success: false})
             return;
         }
 
-        res.status(201).json({message: 'User created!'})
+        res.status(201).json({message: 'User created!', success: true})
         return;
     }
 
+
+    /**
+     * Will return a 200 OK if the user logged in is admin
+     * @param req Request object
+     * @param res Response object
+     * @returns void
+     */
+    private async check(req: Request, res: Response): Promise<void> {
+        res.status(200).json({message: 'User is logged in!', success: true})
+        return;
+    }
+
+
+    private async getAllUsers(req: Request, res: Response): Promise<void> {
+        let users = await this.user.find();
+        res.status(200).json(users)
+        return;
+    }
+
+
+    private async deleteUser(req: Request, res: Response): Promise<void> {
+        let userId = req.params.id;
+
+        if(!userId) {
+            res.status(400).json({message: 'User ID is missing!'})
+            return;
+        }
+
+        if(userId === this.userId) {
+            res.status(400).json({message: 'You cannot delete yourself!'})
+            return;
+        }
+
+        let user = await this.user.findByIdAndDelete(userId);
+        if(!user) {
+            res.status(404).json({message: 'User not found!'})
+            return;
+        }
+
+        let dashboards = await this.dashboard.deleteMany({owner: userId}).exec();
+        console.log(dashboards.deletedCount + ' dashboards deleted');
+        
+
+        res.status(200).json({message: 'User ' +user._id+ ' deleted!', success: true})
+        return;
+    }
 
 }
