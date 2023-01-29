@@ -61,8 +61,9 @@ export default abstract class AbstractRouterComponent extends Authentication {
      * @param next next function
      * @returns 
      */
-    protected isAdminMiddleware(req: Request, res: Response, next: NextFunction): void {
-        if(!this.isAdministrator()){
+    protected async isAdminMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {        
+        if(!await this.isAdministrator()){
+            console.log('User is not an administrator');
             res.status(401).json({message: 'You are not an administrator!', success: false})
             return;
         }
