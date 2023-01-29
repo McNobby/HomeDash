@@ -115,6 +115,12 @@ export default class AuthApi extends AbstractRouterComponent {
     }
 
 
+    /**
+     * Returns all users username and id's
+     * @param req Request object
+     * @param res Response object
+     * @returns void
+     */
     private async getAllUsers(req: Request, res: Response): Promise<void> {
         let users = await this.user.find();
 
@@ -131,6 +137,12 @@ export default class AuthApi extends AbstractRouterComponent {
     }
 
 
+    /**
+     * Will delete a user and all dashboards owned by the user
+     * @param req Request object
+     * @param res Response object
+     * @returns void
+     */
     private async deleteUser(req: Request, res: Response): Promise<void> {
         let userId = req.params.id;
 
