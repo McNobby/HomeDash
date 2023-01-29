@@ -117,8 +117,17 @@ export default class AuthApi extends AbstractRouterComponent {
 
     private async getAllUsers(req: Request, res: Response): Promise<void> {
         let users = await this.user.find();
-        res.status(200).json(users)
-        return;
+
+        let mappedUsers = users.map((user) => {
+            return {
+                _id: user._id,
+                username: user.username
+            }
+        })
+
+        res.status(200).json(mappedUsers)
+
+        return
     }
 
 
