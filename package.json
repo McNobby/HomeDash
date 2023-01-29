@@ -15,7 +15,7 @@
   "main": "/server/server.js",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch\" \"npx nodemon ./dest/server.js\"",
-    "serve": "node ./dest/server/server.js"
+    "serve": "node ./dest/server.js"
   },
   "author": "Teodorbb",
   "license": "ISC",
