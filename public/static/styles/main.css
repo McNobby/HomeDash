@@ -107,9 +107,9 @@ form  {
 
 input {
     border: none;
-    height: 2rem;
+    height: 2.5rem;
     width: 100%;
-    border-radius: 1rem;
+    border-radius: 100px;
     padding: 0 1rem;
     transition: all 0.3s;
     margin-bottom: 1rem;
@@ -177,7 +177,8 @@ span{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 100%;
+    width: 70%;
+    gap: 5rem;
     height: 100%;
     /* overflow: hidden; */
 }
@@ -190,7 +191,7 @@ span{
     box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.733);
     border-radius: 1rem;
     padding: 1rem;
-    width: 20rem;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -203,6 +204,12 @@ span{
     padding: 1rem;
     border-radius: 1rem;
 }
+
+.userForm{
+    width: 100%;
+    gap: 1rem;
+}
+
 
 .user button {
     margin: 0;
