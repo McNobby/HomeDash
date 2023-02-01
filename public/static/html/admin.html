@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
     <script src="/js/loaddata.js"></script>
     <script src="/js/getFromApi.js"></script>
@@ -22,11 +23,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="dash glass">
+        <div class="dash">
 
-        <h1>Admin</h1>
+        <h1>User admin</h1>
 
-        <div class="adminConfig">
+        <div class="adminConfig glass">
             
             <div class="users">
                 <h2>Users</h2>          
@@ -38,6 +39,10 @@
                 <input required type="password" name="password" placeholder="Password">
                 <button id="send">Create</button>
             </form>
+        </div>
+
+        <div class="shadow">
+                <span onclick="window.location.href = '/all.html'" class="material-symbols-outlined">logout</span>
         </div>
 
         </div>
