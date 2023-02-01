@@ -125,6 +125,10 @@ input[type="submit"], button{
     width: 15rem;
 }
 
+input[type="submit"]:hover, button:hover{
+    filter: brightness(1.2);
+}
+
 label{
     align-self: flex-start;
 }
@@ -180,7 +184,7 @@ span{
     width: 70%;
     gap: 5rem;
     height: 100%;
-    /* overflow: hidden; */
+    padding: 2rem;
 }
 
 .users{
