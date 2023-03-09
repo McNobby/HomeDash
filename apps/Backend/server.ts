@@ -3,6 +3,7 @@ import Api from "./api/api.js";
 import Authentication from "./api/Auth/Authentication.js";
 import connectToDB from "./dbconnect.js";
 import dotenv from "dotenv";
+import cors from "cors";
 
 const port = process.env.PORT || 9000;
 
@@ -10,6 +11,10 @@ const app = express();
 const auth = new Authentication();
 
 dotenv.config();
+
+app.use(cors({
+    origin: '*', // <- only during development
+}))
 
 app.use((req, res, next) => {
     console.log(req.method + " " + req.url);
