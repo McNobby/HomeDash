@@ -9,3 +9,11 @@
   background-color: #090b11;
   color: #fff;
 }
+
+.glass {
+  backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  box-shadow: inset 0 0 8em 8em rgba(65, 69, 71, 0.425), 4px 5px 10px rgba(20, 20, 20, 0.445);
+  border: 1px solid rgba(82, 82, 82, 0.938);
+}
+
