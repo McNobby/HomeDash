@@ -11,16 +11,6 @@ const auth = new Authentication();
 
 dotenv.config();
 
-// app.use(express.static('public/static/html'))
-// app.use('/styles', express.static('public/static/styles'))
-// app.use('/images', express.static('public/static/images'))
-// app.use('/js', express.static('public/static/js', {
-//     setHeaders(res){
-//         res.set('Content-Type', 'text/javascript')
-//     }
-// }))
-
-
 app.use((req, res, next) => {
     console.log(req.method + " " + req.url);
     next();
