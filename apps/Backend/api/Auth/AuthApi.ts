@@ -34,7 +34,7 @@ export default class AuthApi extends AbstractRouterComponent {
      * @returns void
      */
     private async login(req: Request, res: Response): Promise<void> {
-        console.log('GET / login');
+        console.log('POST / login');
         
         
         let username = req.body.username;
