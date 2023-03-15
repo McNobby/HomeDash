@@ -1,19 +1,26 @@
 FROM node:19-alpine as build
+
+# Turborepo deps
+RUN apk add --no-cache libc6-compat
+RUN apk update
+
 WORKDIR /app
 
-COPY ./package.json ./
-COPY ./tsconfig.json ./
-COPY ./server ./server
-RUN npm i
-
-RUN npx tsc
+RUN npm i -g turbo
+COPY . .
+RUN turbo prune --scope=frontend --scope=backend --docker
 
 
-FROM node:19-alpine as DEPS
+
+FROM node:19-alpine as install
+RUN apk add --no-cache libc6-compat
+RUN apk update
 WORKDIR /app
 
-COPY ./package.json ./
+COPY --from=builder /app/out/json/ .
+
 RUN npm i --omit=dev
+
 
 
 FROM node:19-alpine as prod

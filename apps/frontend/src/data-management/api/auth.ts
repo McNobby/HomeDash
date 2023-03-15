@@ -4,6 +4,8 @@ import axios from "axios";
 
 interface LoginResponse {
     token: string;
+    username: string;
+    id: string;
     success: boolean;
 }
 
