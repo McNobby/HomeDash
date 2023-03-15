@@ -66,7 +66,7 @@ export default class AuthApi extends AbstractRouterComponent {
 
         console.log('password matches');
         let token = this.createJWT(user._id.toString());
-        res.status(200).json({token: token, success: true});
+        res.status(200).json({token: token, success: true, username: user.username, id: user._id});
         return;
     }
 
@@ -126,7 +126,7 @@ export default class AuthApi extends AbstractRouterComponent {
 
         let mappedUsers = users.map((user) => {
             return {
-                _id: user._id,
+                id: user._id,
                 username: user.username
             }
         })

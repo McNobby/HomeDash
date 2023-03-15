@@ -1,26 +1,55 @@
 import { reactive } from "vue";
 import AuthApi from "../api/auth";
 
+interface User {
+    username: string;
+    id: string;
+}
+
 export default class AuthStore {
 
-    public store = reactive({
-        token: '',
+    public static store = reactive({
+        token: localStorage.getItem('token') || '',
         user: {
             id: '',
-            name: '',
+            username: '',
         }
     })
 
-    public async loginAndSetToken(username: string, password: string) {
-        this.setToken((await AuthApi.login(username, password)).token);
+    public static async loginAndSetToken(username: string, password: string) {
+        let loginResponse = await AuthApi.login(username, password)
+        if(!loginResponse.success){
+            return alert('Login failed');
+        }
+        AuthStore.setToken(loginResponse.token);
+        AuthStore.setUser(loginResponse.username, loginResponse.id);
     }
 
-    public getToken() {
-        return this.store.token;
+
+    public static getToken() {
+        return AuthStore.store.token;
     }
 
-    public setToken(token: string) {
-        this.store.token = token;
+
+    public static isLoggedIn() {
+        return AuthStore.store.token !== '';
+    }
+
+
+    private static setToken(token: string) {
+        AuthStore.store.token = token;
+        localStorage.setItem('token', token);
+    }
+
+
+    private static setUser(username: string, id: string) {
+        AuthStore.store.user.username = username;
+        AuthStore.store.user.id = id;
+    }
+
+
+    public static getUser(): User {
+        return AuthStore.store.user;
     }
 
 } 
