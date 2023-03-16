@@ -26,10 +26,12 @@ import AuthStore from '../data-management/stores/auth';
             }
         },
         methods: {
-            login(e: Event) {
+            async login(e: Event) {
                 e.preventDefault()
-                AuthStore.loginAndSetToken(this.username, this.password)
-                
+                await AuthStore.loginAndSetToken(this.username, this.password)
+                if (AuthStore.isLoggedIn()) {
+                    this.$router.push('/')
+                }
             }
         }
     })
