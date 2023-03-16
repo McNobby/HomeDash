@@ -19,6 +19,7 @@ export default class AuthApi extends AbstractRouterComponent {
 
         this.router.get('/check', (req: Request, res: Response) => this.check(req, res))
         this.router.get('/users', (req: Request, res: Response) => this.getAllUsers(req, res))
+        this.router.get('/me',    (req: Request, res: Response) => this.getMe(req, res))
         
         this.router.post('/register', (req: Request, res: Response) => this.register(req, res))
 
@@ -169,5 +170,17 @@ export default class AuthApi extends AbstractRouterComponent {
         res.status(200).json({message: 'User ' +user._id+ ' deleted!', success: true})
         return;
     }
+
+
+    private async getMe(req: Request, res: Response): Promise<void> {
+        let user = await this.getUserById();
+        if(!user) {
+            res.status(404).json({message: 'User not found!'})
+            return;
+        }
+
+        res.status(200).json({user: {username: user.username}})
+    }
+
 
 }

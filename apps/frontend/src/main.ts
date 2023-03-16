@@ -28,6 +28,9 @@ router.beforeEach((to) => {
     if(!AuthStore.isLoggedIn() && to.name !== 'login') {
         return {name: 'login'}
     }
+    else if(AuthStore.isLoggedIn() && to.name === 'login') {
+        return {name: 'home'}
+    }
 })
 
 createApp(App)

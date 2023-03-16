@@ -3,18 +3,27 @@ import AuthApi from "../api/auth";
 
 interface User {
     username: string;
-    id: string;
+    id?: string;
+    isAdmin?: boolean;
+    isset?: boolean;
 }
 
 export default class AuthStore {
 
-    public static store = reactive({
+    private static store = reactive({
         token: localStorage.getItem('token') || '',
         user: {
             id: '',
             username: '',
+            isAdmin: false,
+            isset: false
         }
     })
+
+
+    public static getStore() {
+        return AuthStore.store;
+    }
 
     public static async loginAndSetToken(username: string, password: string) {
         let loginResponse = await AuthApi.login(username, password)
@@ -42,14 +51,35 @@ export default class AuthStore {
     }
 
 
-    private static setUser(username: string, id: string) {
+    private static setUser(username: string, id: string = '', isAdmin: boolean = false) {
         AuthStore.store.user.username = username;
         AuthStore.store.user.id = id;
+        AuthStore.store.user.isAdmin = isAdmin;
+        AuthStore.store.user.isset = !!username;
     }
 
 
-    public static getUser(): User {
+    public static async getUser(): Promise<User> {
+        if(!AuthStore.isLoggedIn()){
+            return AuthStore.store.user;
+        }
+
+        if(!AuthStore.store.user.isset){
+            let User = await AuthApi.getMe()
+            if(!User){
+                return AuthStore.store.user;
+            }
+            AuthStore.setUser(User.username);
+        }
         return AuthStore.store.user;
     }
+
+
+    public static async logout() {
+        AuthStore.setToken('');
+        AuthStore.setUser('');
+    }
+
+    
 
 } 

@@ -1,5 +1,6 @@
 import AbstractApiModule from "./AbstractApiModule";
 import axios from "axios";
+import AuthStore from "../stores/auth";
 
 
 interface LoginResponse {
@@ -7,6 +8,10 @@ interface LoginResponse {
     username: string;
     id: string;
     success: boolean;
+}
+
+interface Me {
+    username: string;
 }
 
     export default class AuthApi extends AbstractApiModule {
@@ -30,7 +35,27 @@ interface LoginResponse {
         );
     }
 
+    public static async getMe(): Promise<Me|null> {
+        if(!AuthStore.isLoggedIn()){
+            return null;
+        }
 
+        return axios.get(`${this.apiUrl}/api/auth/me`, {
+            headers: {
+                Authorization: `Bearer ${AuthStore.getToken()}`
+            }
+        }).then((response) => {
+            return response.data.user;
+        }).catch((error) => {
+            console.log(error.message, error.name);
+            return {
+                user: {
+                    username: '',
+                }
+            }
+        });
+
+    }
 }
 
 
