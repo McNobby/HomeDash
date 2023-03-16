@@ -29,7 +29,9 @@ export default defineComponent( {
   },
   watch:{
     $route() {
-      this.setUserName()
+      if(!this.username) {
+        this.setUserName()
+      }
     }
   },
   methods: {
