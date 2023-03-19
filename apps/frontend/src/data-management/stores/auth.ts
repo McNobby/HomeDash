@@ -53,10 +53,10 @@ export default class AuthStore {
 
 
     private static setUser(username: string, id: string = '', isAdmin: boolean = false) {
-        AuthStore.store.user.username = username;
-        AuthStore.store.user.id = id;
-        AuthStore.store.user.isAdmin = isAdmin;
-        AuthStore.store.user.isset = !!username;
+        this.store.user.username = username;
+        this.store.user.id = id;
+        this.store.user.isAdmin = isAdmin;
+        this.store.user.isset = !!username;
     }
 
 
