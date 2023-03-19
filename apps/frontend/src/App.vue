@@ -1,7 +1,9 @@
 
 
 <template>
+
      <nav v-if="AuthStore.isLoggedIn()">
+
         <span>Hello {{ username }}</span>
     
         <button class="logout" @click="logout">Logout</button>
@@ -15,7 +17,6 @@ import { defineComponent } from 'vue';
 import AuthStore from './data-management/stores/auth';
 
 export default defineComponent( {
-
   data() {
     return {
       username: '',

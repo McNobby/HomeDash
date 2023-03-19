@@ -2,6 +2,7 @@ import express from "express";
 import Api from "./api/api.js";
 import Authentication from "./api/Auth/Authentication.js";
 import DB from "./dbconnect.js";
+
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -30,14 +31,10 @@ app.use('/api', new Api().getRouter())
 DB.connect().then(() => {
 
     console.log('Creating admin if not already existing');
-auth.createAdminIfNotAlreadyExisting(); 
 
+    auth.createAdminIfNotAlreadyExisting(); 
 
-app.listen(port, () => {
-    console.log(`Server listening on port http://localhost:${port}/`)
+    app.listen(port, () => {
+        console.log(`Server listening on port http://localhost:${port}/`)
+    })
 })
-
-
-})
-
-
