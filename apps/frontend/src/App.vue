@@ -1,5 +1,3 @@
-
-
 <template>
 
      <nav v-if="AuthStore.isLoggedIn()">
