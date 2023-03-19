@@ -11,7 +11,7 @@ export default class Authentication {
     protected userId: string;
 
     constructor() {
-        this.userId = 'test';
+        this.userId = '';
         this.bcrypt = bcrypt;
         this.user = User
         this.jwt = jwt;
@@ -39,7 +39,7 @@ export default class Authentication {
      * @returns true if token is valid, false if not
      */
     public async verifyAndDecodeJWT(token: string|undefined): Promise<boolean> {
-        if(!token) {
+        if(!token || token === 'undefined') {
             return false;
         }
 

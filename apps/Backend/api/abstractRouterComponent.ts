@@ -45,7 +45,7 @@ export default abstract class AbstractRouterComponent extends Authentication {
 
         let token = req.headers.authorization.split(' ')[1]
 
-        if(!this.verifyAndDecodeJWT(token)) {
+        if(token && !this.verifyAndDecodeJWT(token)) {
             res.status(401).json({message: 'Invalid token!'})
             return;
         }

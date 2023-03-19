@@ -40,11 +40,7 @@ export default class AuthApi extends AbstractApiModule {
             return null;
         }
 
-        return this.api.get(`/auth/me`, {
-            headers: {
-                Authorization: `Bearer ${AuthStore.getToken()}`
-            }
-        }).then((response) => {
+        return this.api.get(`/auth/me`).then((response) => {
             return response.data.user;
         }).catch((error) => {
             console.log(error.message, error.name);

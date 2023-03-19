@@ -9,7 +9,7 @@ export default abstract class AbstractApiModule {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': `Bearer ${this.getToken()}`
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     });
 

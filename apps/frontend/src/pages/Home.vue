@@ -32,8 +32,20 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import DashboardsApi from '../data-management/api/dashboards';
 
 export default defineComponent({
+    created() {
+        console.group('Home')
+        
+        let api = new DashboardsApi()
+
+        let myDashes = api.getAll()
+
+        console.log('myDashes', myDashes);
+        
+        console.groupEnd()
+    }
 })
     
 </script>
