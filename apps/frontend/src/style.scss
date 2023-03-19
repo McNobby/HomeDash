@@ -6,14 +6,47 @@
 
 :root {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #090b11;
+}
+
+body {
+    background-color: #090b11;
+  background-image: url('/waves.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   color: #fff;
+  height: 100vh;
+  height: 100vdh;
+}
+
+#app {
+  height: 100%;
 }
 
 .glass {
   backdrop-filter: blur(10px);
   border-radius: 2rem;
-  box-shadow: inset 0 0 8em 8em rgba(65, 69, 71, 0.425), 4px 5px 10px rgba(20, 20, 20, 0.445);
-  border: 1px solid rgba(82, 82, 82, 0.938);
+  box-shadow: inset 0 0 8em 7em rgba(172, 177, 180, 0.219), 4px 5px 10px rgba(20, 20, 20, 0.144);
+  border: 2px solid rgba(241, 241, 241, 0.938);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card {
+  width: 25rem;
+  height: 10rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.02);
+    
+  }
 }
 

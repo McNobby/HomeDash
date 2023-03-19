@@ -1,6 +1,6 @@
 <template>
     <div class="center-wrap">
-        <div class="glass card login">
+        <div class="glass login">
             <h2>Login</h2>
             <form @submit="ev => login(ev)">
                 <input required type="text" placeholder="Username" v-model="username">
