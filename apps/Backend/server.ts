@@ -14,7 +14,7 @@ const auth = new Authentication();
 dotenv.config();
 
 app.use(cors({
-    origin: '*', // <- only during development
+    origin: /(dash\.teobb\.no)|(localhost:3000)|(172\.0\.0\.1)/
 }))
 
 app.use((req, res, next) => {
