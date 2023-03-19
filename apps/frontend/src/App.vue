@@ -1,26 +1,22 @@
 
 
 <template>
-  <AnimatedBackground>
-    <nav v-if="AuthStore.isLoggedIn()">
+
+     <nav v-if="AuthStore.isLoggedIn()">
+
         <span>Hello {{ username }}</span>
     
         <button class="logout" @click="logout">Logout</button>
 
     </nav>
     <router-view></router-view>
-  </AnimatedBackground>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import AnimatedBackground from './components/AnimatedBackground/AnimatedBackground.vue';
 import AuthStore from './data-management/stores/auth';
 
 export default defineComponent( {
-  components: {
-    AnimatedBackground
-  },
   data() {
     return {
       username: '',
@@ -54,8 +50,8 @@ nav{
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
- background: rgb(0,0,0);
-background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(9,11,11,0) 100%); 
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(9,11,11,0) 100%); 
   color: #ffffff;
   font-size: 1.5rem;
   font-weight: 600;
