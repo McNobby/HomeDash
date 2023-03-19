@@ -1,6 +1,6 @@
 import AbstractApiModule from "./AbstractApiModule";
 
-interface iDashboard {
+export interface iDashboard {
     title: string;
     description: string;
     image?: string;
@@ -10,8 +10,7 @@ interface iDashboard {
 export default class DashboardsApi extends AbstractApiModule {
     
     public async getAll(): Promise<iDashboard[]> {
-        let dashes = await (await this.api.get('/dash')).data
-        console.log(dashes);
+        let dashes = await (await this.api.get('/dash')).data.dashboards
         
         return dashes;
     }
