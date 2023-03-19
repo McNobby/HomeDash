@@ -14,11 +14,11 @@ interface Me {
     username: string;
 }
 
-    export default class AuthApi extends AbstractApiModule {
+export default class AuthApi extends AbstractApiModule {
     
 
-    public static async login(username: string, password: string): Promise<LoginResponse> {
-        return axios.post(`${this.apiUrl}/api/auth/login`, {
+    public async login(username: string, password: string): Promise<LoginResponse> {
+        return this.api.post(`/auth/login`, {
                 username: username,
                 password: password
             })
@@ -35,12 +35,12 @@ interface Me {
         );
     }
 
-    public static async getMe(): Promise<Me|null> {
+    public async getMe(): Promise<Me|null> {
         if(!AuthStore.isLoggedIn()){
             return null;
         }
 
-        return axios.get(`${this.apiUrl}/api/auth/me`, {
+        return this.api.get(`/auth/me`, {
             headers: {
                 Authorization: `Bearer ${AuthStore.getToken()}`
             }

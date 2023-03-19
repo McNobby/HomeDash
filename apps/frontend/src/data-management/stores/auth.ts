@@ -20,13 +20,14 @@ export default class AuthStore {
         }
     })
 
+    private static api = new AuthApi();
 
     public static getStore() {
         return AuthStore.store;
     }
 
     public static async loginAndSetToken(username: string, password: string) {
-        let loginResponse = await AuthApi.login(username, password)
+        let loginResponse = await this.api.login(username, password)
         if(!loginResponse.success){
             return alert('Login failed');
         }
@@ -65,7 +66,7 @@ export default class AuthStore {
         }
 
         if(!AuthStore.store.user.isset){
-            let User = await AuthApi.getMe()
+            let User = await this.api.getMe()
             if(!User){
                 return AuthStore.store.user;
             }
@@ -80,6 +81,5 @@ export default class AuthStore {
         AuthStore.setUser('');
     }
 
-    
 
 } 

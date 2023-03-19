@@ -1,4 +1,20 @@
+import axios from "axios";
+
 export default abstract class AbstractApiModule {
-    protected static apiUrl = 'http://localhost:9000';
+
+    protected apiUrl = 'http://localhost:9000/api';
+    protected api = axios.create({
+        baseURL: this.apiUrl,
+        timeout: 2000,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${this.getToken()}`
+        }
+    });
+
+    protected getToken() {
+        localStorage.getItem('token') || '';
+    }
 
 }
