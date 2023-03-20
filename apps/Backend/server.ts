@@ -14,7 +14,7 @@ const auth = new Authentication();
 dotenv.config();
 
 app.use(cors({
-    origin: /(dash\.teobb\.no)|(localhost:3000)|(172\.0\.0\.1)/
+    origin: /(dash\.teobb\.no)|(localhost:[0-9]{3})|(172\.0\.0\.1)/
 }))
 
 app.use((req, res, next) => {
