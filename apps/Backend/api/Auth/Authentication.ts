@@ -8,10 +8,9 @@ export default class Authentication {
     private jwt;
     private bcrypt;
     protected user;
-    protected userId: string;
+    protected userId: string | undefined;
 
     constructor() {
-        this.userId = '';
         this.bcrypt = bcrypt;
         this.user = User
         this.jwt = jwt;
@@ -49,14 +48,10 @@ export default class Authentication {
 
             let user = await this.getUserById()
 
-            if(decoded.passwordUpdated !== user?.passwordUpdated)
-            {
-                return false;
-            }
+            return decoded.passwordUpdated === user?.passwordUpdated;
 
-            return true;
-
-        } catch (err) {
+        } catch ({message}) {
+            console.log("Error in jwt auth: ", message)
             return false;
         }
 
@@ -64,7 +59,10 @@ export default class Authentication {
 
 
     protected async getUserById(): Promise<iUser|null> {
-        return await this.user.findById(this.getUserId())
+        if (this.getUserId()) {
+            return await this.user.findById(this.getUserId())
+        }
+        return null;
     }
 
 
