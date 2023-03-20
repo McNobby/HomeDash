@@ -41,7 +41,7 @@ export default defineComponent({
                     return
                 }
             else {
-                card.style.transition = "transform 0s"
+                card.style.transition = "transform 0.1s ease-out"
             }                
 
                 const rect = card.getBoundingClientRect()
