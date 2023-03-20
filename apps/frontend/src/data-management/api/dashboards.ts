@@ -5,6 +5,7 @@ export interface iDashboard {
     description: string;
     image?: string;
     owner: string;
+    _id: string;
 }
 
 export default class DashboardsApi extends AbstractApiModule {

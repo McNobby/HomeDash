@@ -1,7 +1,8 @@
 <template>
-    <div type="button" class="glass card dash-card"
+    <div type="button" class="glass card dash-card" ref="card"
         @mouseover="hover = true"
         @mouseleave="hover = false"
+        :data-hover="hover"
     >
         <h2>{{ name }}</h2>
         <p>{{ description }}</p>
@@ -10,6 +11,7 @@
 </template>
 
 <script lang="ts">
+import { watch } from 'fs';
 import { defineComponent } from 'vue';
 
 
@@ -36,7 +38,6 @@ export default defineComponent({
     mounted() {
         let imgEl = <HTMLDivElement>this.$refs.img
         imgEl.style.backgroundImage = `url(${this.image})`
-        imgEl.style.backgroundSize = "cover"
     }
 
 })
@@ -60,13 +61,20 @@ export default defineComponent({
     top: 0;
     z-index: -1;
     transition: opacity .3s;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(5px)
 }
 
 .dash-card{
+    height: 20rem;
+
     position: relative;
     z-index: 1;
     overflow: hidden;
     user-select: none;
     cursor: pointer;
+    scale: initial;
+    margin: auto;
 }
 </style>
