@@ -1,5 +1,5 @@
 <template>
-    <div type="button" class="glass card dash-card" ref="card"
+    <div class="glass card dash-card" ref="card"
         @mouseover="hover = true"
         @mouseleave="hover = false"
         :data-hover="hover"
@@ -11,7 +11,6 @@
 </template>
 
 <script lang="ts">
-import { watch } from 'fs';
 import { defineComponent } from 'vue';
 
 
@@ -49,6 +48,7 @@ export default defineComponent({
 .show {
     opacity: 1;
 }
+
 .hide {
     opacity: 0;
 }
@@ -67,7 +67,8 @@ export default defineComponent({
 }
 
 .dash-card{
-    height: 20rem;
+    height: 15rem;
+    width: 30rem;
 
     position: relative;
     z-index: 1;
