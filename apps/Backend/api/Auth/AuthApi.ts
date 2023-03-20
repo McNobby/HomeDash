@@ -15,12 +15,14 @@ export default class AuthApi extends AbstractRouterComponent {
         this.router.post('/login', (req: Request, res: Response) => this.login(req, res))
 
         this.router.use((req: Request, res: Response, next: NextFunction) => this.authenticate(req, res, next))
+
+        this.router.get('/me',    (req: Request, res: Response) => this.getMe(req, res))
+
         this.router.use((req: Request, res: Response, next: NextFunction) => this.isAdminMiddleware(req, res, next))
 
         this.router.get('/check', (req: Request, res: Response) => this.check(req, res))
         this.router.get('/users', (req: Request, res: Response) => this.getAllUsers(req, res))
-        this.router.get('/me',    (req: Request, res: Response) => this.getMe(req, res))
-        
+
         this.router.post('/register', (req: Request, res: Response) => this.register(req, res))
 
         this.router.delete('/user/:id', (req: Request, res: Response) => this.deleteUser(req, res))
