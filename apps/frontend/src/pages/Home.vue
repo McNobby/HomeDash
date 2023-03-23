@@ -7,6 +7,7 @@
             :image="dash.image"
             :key="dash._id"
             :id="`dash-card-${index}`"
+            :dash-id="dash._id"
             data-test="hello world"
             />
         </div>
@@ -17,7 +18,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import DashCard from '../components/DashCard.vue';
-import DashboardsApi, {iDashboard} from '../data-management/api/dashboards';
+import DashboardsStore from "../data-management/stores/dashboards";
 
 export default defineComponent({
     data() {
@@ -26,8 +27,7 @@ export default defineComponent({
         };
     },
     async created() {
-        let api = new DashboardsApi();
-        this.dashboards = await api.getAll();
+        this.dashboards = await DashboardsStore.getDashboards()
 
         document.onmousemove = (e) => {
             let x = e.clientX

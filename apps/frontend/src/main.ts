@@ -6,6 +6,7 @@ import AuthStore from './data-management/stores/auth'
 
 import Home from './pages/Home.vue'
 import Login from './pages/Login.vue'
+import Dashboard from "./pages/Dashboard.vue";
 
 
 const router = createRouter({
@@ -21,6 +22,11 @@ const router = createRouter({
             component: Login,
             name: 'login'
         },
+        {
+            path: '/dash/:id',
+            component: Dashboard,
+            name: Dashboard.name
+        }
     ]
 })
 

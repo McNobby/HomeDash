@@ -1,13 +1,13 @@
 <template>
-    <div class="glass card dash-card" ref="card"
+    <router-link class="glass card dash-card" ref="card"
         @mouseover="hover = true"
         @mouseleave="hover = false"
         :data-hover="hover"
-    >
+        :to="{path: `/dash/${dashId}`}">
         <h2>{{ name }}</h2>
         <p>{{ description }}</p>
         <div v-if="image" :class="{show: hover, hide: !hover}" class="image" ref="img" ></div>
-    </div>
+    </router-link>
 </template>
 
 <script lang="ts">
@@ -27,6 +27,10 @@ export default defineComponent({
         image: {
             type: String,
             required: false
+        },
+        dashId: {
+            type: String,
+            required: true
         }
     },
     data() {
@@ -77,5 +81,8 @@ export default defineComponent({
     cursor: pointer;
     scale: initial;
     margin: auto;
+
+    color: #fff;
+    text-decoration: none;
 }
 </style>

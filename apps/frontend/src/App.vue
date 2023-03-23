@@ -1,13 +1,9 @@
 <template>
-
      <nav v-if="AuthStore.isLoggedIn()">
-
         <span>Hello {{ username }}</span>
-    
         <button class="logout" @click="logout">Logout</button>
-
     </nav>
-    <router-view></router-view>
+      <router-view></router-view>
 </template>
 
 <script lang="ts">
@@ -58,6 +54,7 @@ nav{
   left: 0;
   width: 100%;
   z-index: 100;
+  height: 5rem;
 }
 
 .logout {
@@ -71,7 +68,7 @@ nav{
   color: #ffffff;
   transition: all .2s ease-in-out;
   &:hover {
-  background: #fd6969;
+    background: #fd6969;
   }
 
 }
