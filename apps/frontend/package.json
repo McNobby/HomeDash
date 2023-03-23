@@ -11,9 +11,12 @@
     "serve": "npx serve -s dist"
   },
   "dependencies": {
+    "@sentry/tracing": "^7.44.2",
+    "@sentry/vue": "^7.44.2",
     "@types/axios": "^0.14.0",
     "@types/vue-router": "^2.0.0",
     "axios": "^1.3.4",
+    "dotenv": "^16.0.3",
     "sass": "^1.58.3",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"

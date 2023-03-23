@@ -20,8 +20,7 @@ export default class DashStore {
         }
         else if (this.store.items) {
             let items = this.store.items.filter(item => item.dashId === id)
-
-            if (!items) {
+            if (items.length >= 0) {
                 await this.storeItemsFromApiById(id);
             }
             else {
