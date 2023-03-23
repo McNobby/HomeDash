@@ -16,7 +16,7 @@ export default class AuthStore {
             id: '',
             username: '',
             isAdmin: false,
-            isset: false
+            isSet: false
         }
     })
 
@@ -56,7 +56,7 @@ export default class AuthStore {
         this.store.user.username = username;
         this.store.user.id = id;
         this.store.user.isAdmin = isAdmin;
-        this.store.user.isset = !!username;
+        this.store.user.isSet = !!username;
     }
 
 
@@ -65,7 +65,7 @@ export default class AuthStore {
             return AuthStore.store.user;
         }
 
-        if(!AuthStore.store.user.isset){
+        if(!AuthStore.store.user.isSet){
             let User = await this.api.getMe()
             if(!User){
                 return AuthStore.store.user;
