@@ -1,7 +1,6 @@
 <template>
      <nav v-if="AuthStore.isLoggedIn()">
         <span>Hello {{ username }}</span>
-         <button @click="testError" >Test error</button>
         <button class="logout" @click="logout">Logout</button>
     </nav>
       <router-view></router-view>
@@ -33,9 +32,6 @@ export default defineComponent( {
     },
     async setUserName() {
       this.username = (await AuthStore.getUser()).username
-    },
-    testError() {
-      throw new Error('A different test error')
     }
   }
 })

@@ -6,7 +6,7 @@ export default abstract class AbstractRouterComponent extends Authentication {
     protected router: Router;
     protected routesBuilt: boolean = false;
 
-    constructor() {
+    protected constructor() {
         super();
         this.router = Router();
     }

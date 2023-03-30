@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default abstract class AbstractApiModule {
 
-    protected apiUrl = 'http://localhost:9000/api';
+    protected apiUrl = 'http://localhost:9000/v1';
     protected api = axios.create({
         baseURL: this.apiUrl,
         timeout: 2000,
@@ -13,8 +13,8 @@ export default abstract class AbstractApiModule {
         }
     });
 
-    protected getToken() {
-        localStorage.getItem('token') || '';
+    protected getToken(): string {
+        return localStorage.getItem('token') || '';
     }
 
 }
