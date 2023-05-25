@@ -1,5 +1,9 @@
 <template>
-  <a class="glass dashItem" :href="link">
+  <a class="glass dashItem" :href="link"
+     @mouseover="hover = true"
+     @mouseleave="hover = false"
+     :data-hover="hover"
+  >
       <img v-if="image" :src="image" :alt="title" >
       <img v-else :src="logo" :alt="title" >
 <!--      <img v-else :src="" :alt="title" >-->
@@ -14,6 +18,11 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
     name: "DashItem",
+    data() {
+        return {
+            hover: false
+        }
+    },
     props: {
         title: {
             type: String,

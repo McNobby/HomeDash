@@ -9,6 +9,7 @@
       :key="item._id"
       :id="`dash-item-${index}`"
       :dash-id="item.dashId"
+      class="dash-item"
       />
     </div>
 
@@ -36,6 +37,27 @@ export default defineComponent({
     async created() {
         //@ts-ignore
         this.items = await DashStore.getItemsForBoardById(this.id)
+
+        document.onmousemove = (e) => {
+            let x = e.clientX
+            let y = e.clientY
+            let cards = document.querySelectorAll('.dash-item') as NodeListOf<HTMLDivElement>
+            cards.forEach((card) => {
+
+                if(card.dataset.hover == 'false') {
+                    card.style.transition = "transform .3s ease-in-out"
+                    card.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`
+                    return
+                }
+                else {
+                    card.style.transition = "transform 0.1s ease-out"
+                }
+
+                const rect = card.getBoundingClientRect()
+                card.style.transform = `perspective(1000px) rotateY(${(x - rect.left - rect.width / 2 ) / 20}deg) rotateX(${(y - rect.top - rect.height / 2 ) / -2.5}deg)`
+            })
+        }
+
     },
     computed: {
         shouldShowAttribution(): boolean {
